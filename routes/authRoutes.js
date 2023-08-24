@@ -1,10 +1,9 @@
 import express from "express";
 
 import { validateBody } from "../decorators/index.js";
-
 import  usersSchemas  from "../shemas/users-schemas.js";
-
 import authControllers from "../controllers/authCtrl/authControllers.js";
+import { authenticate } from "../middlewares/index.js";
 
 const authRouter = express.Router();
 
