@@ -14,13 +14,13 @@ authRouter.post(
   authControllers.signup,
 );
 
-// authRouter.post(
-//   "/signin",
-//   validateBody(usersSchemas.userSigninSchema),
-//   authControllers.signin
-// );
+authRouter.post(
+  "/signin",
+  validateBody(usersSchemas.userSigninSchema),
+  authControllers.signin
+);
 
-// authRouter.post("/signout", authenticate, authControllers.signout);
+authRouter.post("/signout", authenticate, authControllers.signout);
 
 
 export default authRouter;
