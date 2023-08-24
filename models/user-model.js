@@ -45,4 +45,6 @@ export const themeSchema = Joi.object({
   theme: Joi.string().valid(themes.join(', ')).required(),
 });
 
-export const User = model('user', userSchema);
+const User = model('user', userSchema);
+
+export default User;

@@ -1,7 +1,7 @@
 // 💙💛  Kostiantyn Koshyk
-
-import { User } from '../../models/user-model.js';
+import  User  from '../../models/user-model.js';
 import fs from 'fs/promises';
+import { ctrlWrapper } from '../../decorators/index.js';
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
