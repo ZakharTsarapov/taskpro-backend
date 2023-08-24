@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
 import { ctrlWrapper } from "../decorators/index.js";
 import {HttpError} from "../helpers/index.js";
-import User from "../models/user.js";
+import User from "../models/user-model.js";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const { JWT_SECRET_KEY } = process.env;
 
 const authenticate = async (req, res, next) => {
@@ -10,14 +12,14 @@ const authenticate = async (req, res, next) => {
   const [bearer, token] = authorization.split(" ");
 
   if (bearer !== "Bearer") {
-    throw HttpError(401);
+    throw HttpError(401, 'Not authorized');
   }
 
   try {
     const { id } = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(id);
     if (!user || !user.token) {
-      throw HttpError(401);
+      throw HttpError(401, 'Not authorized');
     }
     req.user = user;
     next();
@@ -27,3 +29,4 @@ const authenticate = async (req, res, next) => {
 };
 
 export default ctrlWrapper(authenticate);
+
