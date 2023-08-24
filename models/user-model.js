@@ -3,6 +3,7 @@ import { Schema, model } from 'mongoose';
 import Joi from 'joi';
 import handleMongooseError from '../helpers/handleMangooseError.js';
 import { emailRegExp, passwordRegExp } from '../constants/regExp.js';
+import { themes } from '../constants/arrays.js';
 
 const userSchema = new Schema(
   {
@@ -31,7 +32,7 @@ const userSchema = new Schema(
     },
     theme: {
       type: String,
-      enum: ['without priority', 'low', 'medium', 'high'],
+      enum: themes,
       default: 'low',
     },
   },
@@ -40,8 +41,8 @@ const userSchema = new Schema(
 
 userSchema.post('save', handleMongooseError);
 
-export const subscriptionSchema = Joi.object({
-  subscription: Joi.string().valid('without priority', 'low', 'medium', 'high').required(),
+export const themeSchema = Joi.object({
+  theme: Joi.string().valid(themes.join(', ')).required(),
 });
 
 export const User = model('user', userSchema);
