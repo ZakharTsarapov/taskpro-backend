@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import User from '../../models/user-model.js';
 import updateUserSchema from '../../shemas/update-user-schema.js';
-import BadRequestError from '../../helpers/index.js';
+import { BadRequestError } from '../../helpers/index.js';
 import { ctrlWrapper } from '../../decorators/index.js';
 
 const updateDataUser = async (req, res, next) => {
@@ -25,10 +25,9 @@ const updateDataUser = async (req, res, next) => {
     res.status(204).json();
   }
 
-  const hashPassword = await bcrypt.hash(password, 10);
-
   if (password) {
-    updateDataUser.password = hashPassword(password);
+    const hashPassword = await bcrypt.hash(password, 10);
+    updateDataUser.password = hashPassword;
     updateDataUser.token = '';
     res.status(204).json();
   }
