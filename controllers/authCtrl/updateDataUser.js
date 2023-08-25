@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import User from '../../models/user-model.js';
 import updateUserSchema from '../../shemas/update-user-schema.js';
 import BadRequestError from '../../helpers/index.js';
+import { ctrlWrapper } from '../../decorators/index.js';
 
 const updateDataUser = async (req, res, next) => {
   const { _id, name: oldName, email: oldEmail } = req.user;
@@ -42,5 +43,4 @@ const updateDataUser = async (req, res, next) => {
   });
   res.json(data);
 };
-
-export default updateDataUser;
+export default { updateDataUser: ctrlWrapper(updateDataUser) };
