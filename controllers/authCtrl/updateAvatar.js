@@ -21,9 +21,7 @@ const uploadImage = async imagePath => {
   };
 
   try {
-    // Upload the image
-    const result = await cloudinary.uploader.upload(imagePath, options);
-    return result;
+    return await cloudinary.uploader.upload(imagePath, options); // Upload the image
   } catch (error) {
     console.error(error);
   }
@@ -31,19 +29,18 @@ const uploadImage = async imagePath => {
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
+  // const _id = '64e87f9ef0051006daa5ef98'; // !!! TEST
   const { path: oldPath } = req.file; // прилетел переименованный jpg
 
-  const { url, public_id } = await uploadImage(oldPath);
+  const { url } = await uploadImage(oldPath);
   const avatarURL = {
-    avatarUrl: url,
-    avatarId: public_id,
+    avatarURL: url,
   };
 
   await fs.unlink(oldPath);
 
-  await User.findByIdAndUpdate(_id, { avatarURL });
-
-  res.json({ avatarURL });
+  await User.findByIdAndUpdate(_id, avatarURL);
+  res.json(avatarURL);
 };
 
 export default {

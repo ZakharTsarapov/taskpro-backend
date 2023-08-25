@@ -24,7 +24,7 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      default: '/', // добавить ссылку на дефолтное значение
+      default: '/', // добавить динамическую ссылку на дефолтное значение трех аватарок из проекта
     },
     token: {
       type: String,
