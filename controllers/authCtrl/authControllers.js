@@ -9,7 +9,7 @@ const { JWT_SECRET_KEY } = process.env;
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
-  const user = User.findOne({ email });
+  const user = await User.findOne({ email });
 
   if (user) {
     throw HttpError(409, 'Email in use');
@@ -29,6 +29,7 @@ const signup = async (req, res) => {
 
   res.status(201).json({
     name,
+    email,
     token,
   });
 };
@@ -49,7 +50,7 @@ const signin = async (req, res) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '23h' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({

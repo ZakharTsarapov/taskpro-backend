@@ -1,28 +1,46 @@
 // 💙💛  Kostiantyn Koshyk
-import  User  from '../../models/user-model.js';
+import User from '../../models/user-model.js';
 import fs from 'fs/promises';
 import { ctrlWrapper } from '../../decorators/index.js';
+import { v2 as cloudinary } from 'cloudinary';
+import 'dotenv/config';
+
+const { CLRY_API_KEY, CLRY_API_SECRET, CLRY_CLOUD_NAME } = process.env;
+
+cloudinary.config({
+  cloud_name: CLRY_CLOUD_NAME,
+  api_key: CLRY_API_KEY,
+  api_secret: CLRY_API_SECRET,
+});
+
+const uploadImage = async imagePath => {
+  const options = {
+    use_filename: true,
+    unique_filename: false,
+    overwrite: true,
+  };
+
+  try {
+    return await cloudinary.uploader.upload(imagePath, options); // Upload the image
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
-  const { path: oldPath } = req.file;
-  const newPath = () => {
-    'Укразать путь для записи в Cloudinary';
-    console.log('add to Cloudinary');
-    return;
+  // const _id = '64e87f9ef0051006daa5ef98'; // !!! TEST
+  const { path: oldPath } = req.file; // прилетел переименованный jpg
+
+  const { url } = await uploadImage(oldPath);
+  const avatarURL = {
+    avatarURL: url,
   };
 
-  await fs.rename(oldPath, newPath);
+  await fs.unlink(oldPath);
 
-  const getAvatarFromCloudinary = () => {
-    console.log('get from Cloudinary');
-    const avatarUrl = '';
-    return avatarUrl;
-  };
-
-  await User.findByIdAndUpdate(_id, { avatarURL: getAvatarFromCloudinary() });
-
-  res.json({ avatarURL: getAvatarFromCloudinary() });
+  await User.findByIdAndUpdate(_id, avatarURL);
+  res.json(avatarURL);
 };
 
 export default {
