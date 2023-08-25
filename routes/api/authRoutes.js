@@ -16,6 +16,6 @@ authRouter.post('/signin', validateBody(usersSchemas.userSigninSchema), authCont
 
 authRouter.post('/signout', authenticate, authControllers.signout);
 
-// authRouter.post('/avatar', isEmptyBody, upload.single('avatar'), updateAvatar); // {avatar: avatar.jpg} - поле от фронта
+authRouter.post('/avatar', upload.single('avatar'), updateAvatar.updateAvatar);
 
 export default authRouter;
