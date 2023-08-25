@@ -14,6 +14,6 @@ const userSigninSchema = Joi.object({
 });
 
 export default {
-    userSignupSchema,
-    userSigninSchema,
+  userSignupSchema,
+  userSigninSchema,
 };
