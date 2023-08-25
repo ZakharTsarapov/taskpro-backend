@@ -1,4 +1,4 @@
-import HttpError from './HttpError';
+import HttpError from './HttpError.js';
 const BadRequestError = (error, req, res, next) => {
   if (error) {
     const messageError = error.details.map(detail => detail.message).join(' ');
