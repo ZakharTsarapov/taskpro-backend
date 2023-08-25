@@ -5,6 +5,7 @@ import authControllers from '../../controllers/authCtrl/authControllers.js';
 import usersSchemas from '../../shemas/users-schemas.js';
 import { validateBody } from '../../decorators/index.js';
 import updateAvatar from '../../controllers/authCtrl/updateAvatar.js';
+import updateCtrl from '../../controllers/authCtrl/updateDataUser.js';
 
 const authRouter = express.Router();
 
@@ -18,4 +19,5 @@ authRouter.post('/signout', authenticate, authControllers.signout);
 
 // authRouter.post('/avatar', isEmptyBody, upload.single('avatar'), updateAvatar); // {avatar: avatar.jpg} - поле от фронта
 
+authRouter.put('/update', authenticate, updateCtrl.updateDataUser);
 export default authRouter;
