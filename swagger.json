@@ -1,0 +1,32 @@
+{
+    "openapi": "3.0.3",
+  "info": {
+    "version": "2.0.2",
+    "title": "Task Pro API docs",
+    "description": "**API documentation for Task Pro application.** ",
+    "contact": {
+      "name": "HotFixTeam",
+      "url": "https://github.com/ZakharTsarapov/taskpro-backend"
+    }
+  },
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json"],
+  "servers": [
+    { "url": "https://taskpro-backend-jo75.onrender.com", "description": "Production" }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Authorization endpoints"
+    }
+  ],
+  "paths": {
+    "/users/signup": {
+        "post": {
+            "tags": ["Users"],
+        "summary": "User registration",
+        "parameters": []
+        }
+    }
+  }
+}
