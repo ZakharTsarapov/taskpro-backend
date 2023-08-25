@@ -9,7 +9,7 @@ const { JWT_SECRET_KEY } = process.env;
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
-  const user = User.findOne({ email });
+  const user = await User.findOne({ email });
 
   if (user) {
     throw HttpError(409, 'Email in use');
