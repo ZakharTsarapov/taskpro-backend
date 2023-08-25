@@ -6,6 +6,7 @@ import { ctrlWrapper } from '../../decorators/index.js';
 
 const updateDataUser = async (req, res, next) => {
   const { _id, name: oldName, email: oldEmail } = req.user;
+
   const { value, error } = updateUserSchema.validate(req.body, {
     abortEarly: false,
   });
@@ -21,25 +22,25 @@ const updateDataUser = async (req, res, next) => {
 
   if (email && email !== oldEmail) {
     updateDataUser.email = email;
-    updateDataUser.token = '';
+    //updateDataUser.token = '';
     res.status(204).json();
   }
 
   if (password) {
     const hashPassword = await bcrypt.hash(password, 10);
     updateDataUser.password = hashPassword;
-    updateDataUser.token = '';
+    //updateDataUser.token = '';
     res.status(204).json();
   }
 
   // if (req.file) {
-  //     updateDataUser.avatarURL = req.file.path;
+  //   updateDataUser.avatarURL = req.file.path;
   // }
 
   const data = await User.findByIdAndUpdate(_id, updateDataUser, {
     new: true,
-    // select: 'name email avatarURL _id',
+    select: 'name email avatarURL -_id',
   });
-  res.status(200).json(data);
+  res.json();
 };
 export default { updateDataUser: ctrlWrapper(updateDataUser) };
