@@ -33,13 +33,13 @@ const updateDataUser = async (req, res, next) => {
   }
 
   // if (req.file) {
-  //     updateDataUser.avatarURL =
+  //     updateDataUser.avatarURL = req.file.path;
   // }
 
   const data = await User.findByIdAndUpdate(_id, updateDataUser, {
     new: true,
-    select: 'name email avatarURL _id',
+    // select: 'name email avatarURL _id',
   });
-  res.json(data);
+  res.status(200).json(data);
 };
 export default { updateDataUser: ctrlWrapper(updateDataUser) };
