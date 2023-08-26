@@ -19,7 +19,7 @@ authRouter.post('/signout', authenticate, authControllers.signout);
 
 authRouter.post('/avatar', upload.single('avatar'), updateAvatar.updateAvatar);
 
-
 authRouter.put('/update', authenticate, updateCtrl.updateDataUser);
+//authRouter.patch('/update', authenticate, updateCtrl.updateDataUser);
 
 export default authRouter;
