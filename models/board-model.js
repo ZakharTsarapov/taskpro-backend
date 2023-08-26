@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
-import { handleMongooseError } from '../../helpers/index.js';
-import { arrays } from '../../constants/arrays.js';
+import { handleMongooseError } from '../helpers/index.js';
+import { backgrounds, icons } from '../constants/arrays.js';
 
 const boardSchema = new Schema(
   {
@@ -10,13 +10,13 @@ const boardSchema = new Schema(
     },
     icon: {
       type: String,
-      enum: arrays.icons,
-      default: arrays.icons[0],
+      enum: icons,
+      default: icons[0],
     },
     background: {
       type: String,
-      enum: arrays.backgrounds,
-      default: arrays.backgrounds[0],
+      enum: backgrounds,
+      default: backgrounds[0],
     },
     owner: {
       type: Schema.Types.ObjectId,

@@ -3,7 +3,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import authRouter from './routes/api/authRoutes.js';
 
-// import boardRouter from './routes/api/boardRoutes.js';
+import boardRouter from './routes/api/boardRoutes.js';
 
 import swaggerUi from 'swagger-ui-express';
 import path from 'path';
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/users', authRouter);
 
-// app.use('/boards, boardRouter');
+app.use('/boards', boardRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

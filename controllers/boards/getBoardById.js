@@ -1,4 +1,4 @@
-import { Board } from '../../models/board-model.js';
+import  Board  from '../../models/board-model.js';
 import { ctrlWrapper } from '../../decorators/index.js';
 import { HttpError } from '../../helpers/index.js';
 

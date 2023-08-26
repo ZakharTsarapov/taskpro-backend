@@ -1,19 +1,19 @@
 import Joi from 'joi';
-import { array } from '../../constants/arrays.js';
+import { icons, backgrounds } from '../constants/arrays.js';
 
 const addBoardSchema = Joi.object({
   title: Joi.string().required(),
-  icon: Joi.string.valid(...array.icons),
+  icon: Joi.string().valid(...icons),
   background: Joi.string()
-    .valid(...array.backgrounds)
+    .valid(...backgrounds)
     .allow(null),
 });
 
 const updateBoardSchema = Joi.object({
   title: Joi.string(),
-  icon: Joi.string().valid(...array.icons),
+  icon: Joi.string().valid(...icons),
   background: Joi.string()
-    .valid(...array.backgrounds)
+    .valid(...backgrounds)
     .allow(null),
 });
 

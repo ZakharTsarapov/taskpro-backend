@@ -1,5 +1,5 @@
-import { Board } from '../../models/board-model.js';
-import { boardSchemas } from '../../shemas/board-schema.js';
+import  Board  from '../../models/board-model.js';
+import  boardSchemas  from '../../shemas/board-schema.js';
 import { BadRequestError } from '../../helpers/index.js';
 import { ctrlWrapper } from '../../decorators/index.js';
 
