@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import User from '../../models/user-model.js';
 import updateUserSchema from '../../shemas/update-user-schema.js';
-import { BadRequestError } from '../../helpers/index.js';
+import { BadRequestError, uploadToCloudinaryImage } from '../../helpers/index.js';
 import { ctrlWrapper } from '../../decorators/index.js';
 
 const updateDataUser = async (req, res, next) => {
@@ -22,25 +22,25 @@ const updateDataUser = async (req, res, next) => {
 
   if (email && email !== oldEmail) {
     updateDataUser.email = email;
-    //updateDataUser.token = '';
-    res.status(204).json();
+    updateDataUser.token = '';
+    //res.status(204).json();
   }
 
   if (password) {
     const hashPassword = await bcrypt.hash(password, 10);
     updateDataUser.password = hashPassword;
-    //updateDataUser.token = '';
-    res.status(204).json();
+    updateDataUser.token = '';
+    //res.status(204).json();
   }
 
-  // if (req.file) {
-  //   updateDataUser.avatarURL = req.file.path;
-  // }
+  if (req.file) {
+    updateDataUser.avatarURL = await uploadToCloudinaryImage(req);
+  }
 
   const data = await User.findByIdAndUpdate(_id, updateDataUser, {
     new: true,
     select: 'name email avatarURL -_id',
   });
-  res.json();
+  res.status(200).json(data);
 };
 export default { updateDataUser: ctrlWrapper(updateDataUser) };
