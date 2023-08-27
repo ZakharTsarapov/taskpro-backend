@@ -22,15 +22,13 @@ const updateDataUser = async (req, res, next) => {
 
   if (email && email !== oldEmail) {
     updateDataUser.email = email;
-    updateDataUser.token = '';
-    //res.status(204).json();
+    //updateDataUser.token = '';
   }
 
   if (password) {
     const hashPassword = await bcrypt.hash(password, 10);
     updateDataUser.password = hashPassword;
-    updateDataUser.token = '';
-    //res.status(204).json();
+    //updateDataUser.token = '';
   }
 
   if (req.file) {
@@ -39,7 +37,7 @@ const updateDataUser = async (req, res, next) => {
 
   const data = await User.findByIdAndUpdate(_id, updateDataUser, {
     new: true,
-    select: 'name email avatarURL -_id',
+    //select: 'name email avatarURL -_id',
   });
   res.status(200).json(data);
 };
