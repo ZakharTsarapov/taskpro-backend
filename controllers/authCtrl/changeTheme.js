@@ -1,5 +1,6 @@
 import User from '../../models/user-model.js';
 import fs from 'fs/promises';
+import { ctrlWrapper } from "../../decorators/index.js"
 
 const changeTheme =  async (req, res) => {
   const { _id } = req.user;
@@ -13,4 +14,5 @@ const changeTheme =  async (req, res) => {
   });
 };
 
-export default changeTheme;
+export default {
+  changeTheme: ctrlWrapper(changeTheme) };

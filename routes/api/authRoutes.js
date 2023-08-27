@@ -23,6 +23,6 @@ authRouter.post('/:id/avatar', authenticate, upload.single('avatar'), updateAvat
 authRouter.put('/update', authenticate, updateCtrl.updateDataUser);
 //authRouter.patch('/update', authenticate, updateCtrl.updateDataUser);
 
-authRouter.patch('/themes', validateBody(usersSchemas.userChangeTheme), authenticate, changeTheme)
+authRouter.patch('/themes', validateBody(usersSchemas.userChangeTheme), authenticate, changeTheme.changeTheme);
 
 export default authRouter;
