@@ -17,7 +17,7 @@ authRouter.post('/signin', validateBody(usersSchemas.userSigninSchema), authCont
 
 authRouter.post('/signout', authenticate, authControllers.signout);
 
-authRouter.post('/:id/avatar', authenticate, upload.single('avatar'), updateAvatar.updateAvatar);
+authRouter.post('/avatar', authenticate, upload.single('avatar'), updateAvatar.updateAvatar);
 
 // authRouter.put(':id/update', authenticate, upload.single('avatar'), updateCtrl.updateDataUser);
 authRouter.put('/update', authenticate, upload.single('avatar'), updateCtrl.updateDataUser);
