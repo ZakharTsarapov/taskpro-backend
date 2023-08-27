@@ -58,6 +58,7 @@ const signin = async (req, res) => {
   res.json({
     name: user.name,
     token,
+    theme: user.theme,
     
   });
 };
