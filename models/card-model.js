@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { priorities } from '../constants/arrays';
-import { deadlineRegExp } from '../constants/regExp';
+import { priorities } from '../constants/arrays.js';
+import { deadlineRegExp } from '../constants/regExp.js';
+import { handleMongooseError } from '../helpers/index.js';
 
 const cardSchema = new Schema(
   {
@@ -30,7 +31,7 @@ const cardSchema = new Schema(
   { versionKey: false, timestamps: false }
 );
 
-
+cardSchema.post('save', handleMongooseError);
 
 const Card = model("card", cardSchema);
 
