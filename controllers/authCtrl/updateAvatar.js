@@ -29,6 +29,7 @@ const uploadImage = async imagePath => {
 
 const updateAvatar = async (req, res) => {
   const { _id } = req.user;
+  const { id } = req.params;
   // const _id = '64e87f9ef0051006daa5ef98'; // !!! TEST
   const { path: oldPath } = req.file; // прилетел переименованный jpg
 
