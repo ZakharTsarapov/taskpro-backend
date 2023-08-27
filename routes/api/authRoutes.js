@@ -19,7 +19,8 @@ authRouter.post('/signout', authenticate, authControllers.signout);
 
 authRouter.post('/:id/avatar', authenticate, upload.single('avatar'), updateAvatar.updateAvatar);
 
-authRouter.put('/update', authenticate, updateCtrl.updateDataUser);
+// authRouter.put('/update', authenticate, updateCtrl.updateDataUser);
+authRouter.put('/:id/update', authenticate, updateCtrl.updateDataUser);
 //authRouter.patch('/update', authenticate, updateCtrl.updateDataUser);
 
 export default authRouter;
