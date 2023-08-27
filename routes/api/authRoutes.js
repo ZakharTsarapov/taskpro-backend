@@ -5,6 +5,7 @@ import authControllers from '../../controllers/authCtrl/authControllers.js';
 import usersSchemas from '../../shemas/users-schemas.js';
 import { validateBody } from '../../decorators/index.js';
 import updateAvatar from '../../controllers/authCtrl/updateAvatar.js';
+import changeTheme from '../../controllers/authCtrl/changeTheme.js';
 import updateCtrl from '../../controllers/authCtrl/updateDataUser.js';
 
 const authRouter = express.Router();
@@ -21,5 +22,7 @@ authRouter.post('/:id/avatar', authenticate, upload.single('avatar'), updateAvat
 
 authRouter.put('/update', authenticate, updateCtrl.updateDataUser);
 //authRouter.patch('/update', authenticate, updateCtrl.updateDataUser);
+
+authRouter.patch('/themes', validateBody(usersSchemas.userChangeTheme), authenticate, changeTheme)
 
 export default authRouter;
