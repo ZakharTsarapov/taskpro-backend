@@ -1,9 +1,13 @@
 {
-    "openapi": "3.0.3",
+  "openapi": "3.0.3",
   "info": {
     "version": "2.0.2",
     "title": "Task Pro API docs",
     "description": "**API documentation for Task Pro application.** ",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
     "contact": {
       "name": "HotFixTeam",
       "url": "https://github.com/ZakharTsarapov/taskpro-backend"
@@ -11,22 +15,231 @@
   },
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json"],
-  "servers": [
-    { "url": "https://taskpro-backend-jo75.onrender.com", "description": "Production" }
-  ],
+  "servers": [{ "url": "https://taskpro-backend-jo75.onrender.com", "description": "Production" }],
   "tags": [
     {
       "name": "Users",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "Boards",
+      "description": "Boards endpoints"
+    },
+    {
+      "name": "Columns",
+      "description": "Columns endpoints"
+    },
+    {
+      "name": "Tasks",
+      "description": "Tasks endpoints"
     }
   ],
   "paths": {
     "/users/signup": {
-        "post": {
-            "tags": ["Users"],
+      "post": {
+        "tags": ["Users"],
         "summary": "User registration",
-        "parameters": []
+        "parameters": [],
+        "requestBody": {
+          "description": "User registation",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succsessful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Email already in use"
+          }
         }
+      }
+    },
+    "/users/signin": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "User registation",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login succsess",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email or password invalid"
+          }
+        }
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "get currnet user",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "Succsessful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCurrentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/signout": {
+      "post": {
+        "tags": ["Users"]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User name",
+            "example": "Ivan"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User name",
+            "example": "Ivan"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWFmNWIyN2JkZmM5ZjlhM2MxOTA3YyIsImlhdCI6MTY5MzExOTkyOSwiZXhwIjoxNjkzMjAyNzI5fQ.j9WScLzyaieMmP6D5qTVOeGq-BJDbPh9cL4iWtp4G-Q"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWFmNWIyN2JkZmM5ZjlhM2MxOTA3YyIsImlhdCI6MTY5MzExOTkyOSwiZXhwIjoxNjkzMjAyNzI5fQ.j9WScLzyaieMmP6D5qTVOeGq-BJDbPh9cL4iWtp4G-Q"
+          }
+        }
+      },
+      "getCurrentResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Ivan"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User avatar",
+            "example": "http://res.cloudinary.com/daqnavarl/image/upload/v1693131808/1693131809722-545479341_avatarka.jpg"
+          },
+          "theme": {
+            "type": "string",
+            "description": "User theme",
+            "example": "light"
+          }
+        }
+      }
     }
   }
 }
