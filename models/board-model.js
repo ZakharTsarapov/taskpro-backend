@@ -23,6 +23,10 @@ const boardSchema = new Schema(
       ref: 'user',
       required: 'true',
     },
+    columnOrder: { 
+      type: Array, 
+      default: [], 
+    },
   },
   { versionKey: false, timestamps: true }
 );
