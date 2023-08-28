@@ -1,11 +1,15 @@
 import Joi from 'joi';
+import objectId from 'joi-objectid';
 
-const addColumnShema = Joi.object({
+const addColumnSchema = Joi.object({
   title: Joi.string().required(),
-  //   board: Joi.string(),
+  //board: objectId(Joi),
   index: Joi.number().required(),
 });
 
 const updateColumnSchema = Joi.object({
   title: Joi.string().required(),
 });
+
+const columnSchemas = { addColumnSchema, updateColumnSchema };
+export default columnSchemas;
