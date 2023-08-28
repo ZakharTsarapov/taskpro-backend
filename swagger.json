@@ -293,15 +293,16 @@
         "tags": ["Boards"],
         "summary": "delete board",
         "security": [{ "Bearer": [] }],
-        "parameters": [{
-          "name": "_id",
-          "in": "path",
-          "required": true,
-          "description": "id of the board",
-          "schema": {
-            "type": "string"
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "id of the board",
+            "schema": {
+              "type": "string"
+            }
           }
-        }
         ],
         "responses": {
           "200": {
@@ -317,11 +318,21 @@
         }
       }
     },
-    "/boards/{id}": {
+    "/boards/{id}/": {
       "put": {
         "tags": ["Boards"],
         "summary": "update board information",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "required": true,
+            "description": "Id of the board",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "update board object",
@@ -370,6 +381,49 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/getAllBoards"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/boards/{id}": {
+      "get": {
+        "tags": ["Boards"],
+        "summary": "Get one board by id",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "required": true,
+            "description": "Id of the board",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBoardById"
                 }
               }
             }
@@ -776,6 +830,20 @@
               "owner": "146kljh4kj72h425kjhy54k"
             }
           ]
+        }
+      },
+      "GetBoardById": {
+        "type": "object",
+        "example": {
+          "boards": {
+            "_id": "094654jlkjhjk5h3j2k",
+            "title": "New Board",
+            "icon": "icon-colors",
+            "background": "background1",
+            "columnOrder": [],
+            "owner": "254klj6lkjl6j3lk6j"
+          },
+          "columns": []
         }
       }
     }
