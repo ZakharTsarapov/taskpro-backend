@@ -9,9 +9,10 @@ const columnSchema = new Schema(
     },
     board: {
       type: Schema.Types.ObjectId,
-      required: [true, 'Board assignment for the column is required'],
+      //required: [true, 'Board assignment for the column is required'],
       ref: 'board',
     },
+
     cardOrder: {
       type: Array,
       default: [],
