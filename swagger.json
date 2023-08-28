@@ -254,6 +254,68 @@
           }
         }
       }
+    },
+    "/boards/": {
+      "post": {
+        "tags": ["Boards"],
+        "summary": "Add board",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "boards object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addBoardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succsessful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addBoardResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/boards/{_id}": {
+      "delete": {
+        "tags": ["Boards"],
+        "summary": "delete board",
+        "security": [{ "Bearer": [] }],
+        "parameters": [{
+          "name": "_id",
+          "in": "path",
+          "required": true,
+          "description": "id of the board",
+          "schema": {
+            "type": "string"
+          }
+        }
+        ],
+        "responses": {
+          "200": {
+            "description": "Board successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteBoardResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -484,6 +546,82 @@
             "type": "string",
             "description": "Error message",
             "example": "Missing fields"
+          }
+        }
+      },
+      "addBoardRequest": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "board title",
+            "example": "new board"
+          },
+          "icon": {
+            "type": "string",
+            "description": "board icons",
+            "enum": "icons",
+            "default": "icon-colors"
+          },
+          "background": {
+            "type": "string",
+            "description": "board background",
+            "enum": "backgrounds",
+            "default": "backgound1"
+          }
+        }
+      },
+      "addBoardResponse": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "new board"
+          },
+          "icon": {
+            "type": "string",
+            "example": "icon-colors"
+          },
+          "background": {
+            "type": "string",
+            "example": "background1"
+          },
+          "columnOrder": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "230sdf8sdf98s7f9"
+                }
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "example": "13231k3j12kh1jhjk"
+          },
+          "_id": {
+            "type": "string",
+            "example": "12312jkgj123h2jk1h"
+          }
+        }
+      },
+      "deleteBoardResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "object",
+            "example": {
+              "_id": "1134jlk342l4kj2ljc",
+              "title": "new board",
+              "icon": "icon-colors",
+              "background": "background1",
+              "columnOrder": [],
+              "owner": "54klj463jlk34lkj"
+            }
           }
         }
       }
