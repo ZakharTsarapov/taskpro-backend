@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "2.0.2",
+    "version": "2.0.1",
     "title": "Task Pro API docs",
     "description": "**API documentation for Task Pro application.** ",
     "license": {
@@ -110,7 +110,6 @@
         "summary": "get currnet user",
         "parameters": [],
         "security": [{ "Bearer": [] }],
-
         "responses": {
           "200": {
             "description": "Succsessful",
@@ -127,7 +126,133 @@
     },
     "/users/signout": {
       "post": {
-        "tags": ["Users"]
+        "tags": ["Users"],
+        "summary": "user logout",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Logout succsess",
+            "content": {}
+          },
+          "401": {
+            "description": "not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Add avatar for User",
+        "parameters": [],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "description": "User's avatar object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/userAvatarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "operation successful",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/userAvatarResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/update": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update user's information",
+        "parameters": [],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "description": "User's information object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateUsersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "operation successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateUsersResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/themes": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "change user's theme",
+        "parameters": [],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "description": "User's themes object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userThemeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "operation successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/userThemeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "missing fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "badRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "not authorized",
+            "content": {}
+          }
+        }
       }
     }
   },
@@ -237,6 +362,128 @@
             "type": "string",
             "description": "User theme",
             "example": "light"
+          }
+        }
+      },
+      "userAvatarRequest": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "userAvatarResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar url",
+            "example": "http://res.cloudinary.com/daqnavarl/image/upload/v1693131808/1693131809722-545479341_avatarka.jpg"
+          }
+        }
+      },
+      "updateUsersRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User name",
+            "example": "Ivan"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password",
+            "example": "qwerty123"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar url",
+            "example": "http://res.cloudinary.com/daqnavarl/image/upload/v1693131808/1693131809722-545479341_avatarka.jpg"
+          }
+        }
+      },
+      "updateUsersResponse": {
+        "type": "object",
+        "properties": {
+          "User": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Andrew"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email",
+                "example": "Andrew@example.com"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar URL",
+                "example": "https://i.pinimg.com/originals/b7/34/e9/b734e9d303af5f13994c12d407862658.png"
+              },
+              "theme": {
+                "type": "string",
+                "description": "Users's theme",
+                "example": "dark"
+              }
+            }
+          },
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWFmNWIyN2JkZmM5ZjlhM2MxOTA3YyIsImlhdCI6MTY5MzExOTkyOSwiZXhwIjoxNjkzMjAyNzI5fQ.j9WScLzyaieMmP6D5qTVOeGq-BJDbPh9cL4iWtp4G-Q"
+          }
+        }
+      },
+      "userThemeRequest": {
+        "type": "object",
+        "required": ["theme"],
+        "properties": {
+          "theme": {
+            "type": "string",
+            "description": "user's themes",
+            "enum": "themes",
+            "default": "light"
+          }
+        }
+      },
+      "userThemeResponse": {
+        "type": "object",
+        "properties": {
+          "User": {
+            "type": "object",
+            "properties": {
+              "theme": {
+                "type": "string",
+                "description": "User theme",
+                "enum": "themes",
+                "default": "light"
+              }
+            }
+          }
+        }
+      },
+      "badRequestResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Missing fields"
           }
         }
       }
