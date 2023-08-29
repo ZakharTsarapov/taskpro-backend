@@ -11,9 +11,9 @@ const addColumn = async (req, res) => {
   if (error) {
     BadRequestError(error);
   }
-  const { board } = value;
+
   const result = await Column.create({ ...value });
-  await Board.findByIdAndUpdate(board, { $push: { columnOrder: result._id } });
+  await Board.findByIdAndUpdate(result.board, { $push: { columnOrder: result._id } });
 
   res.status(201).json({
     status: 'create',
