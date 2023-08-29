@@ -3,7 +3,7 @@ import { priorities } from '../constants/arrays.js';
 import { deadlineRegExp } from '../constants/regExp.js';
 import { handleMongooseError } from '../helpers/index.js';
 
-const cardSchema = new Schema(
+const taskSchema = new Schema(
   {
     title: {
       type: String,
@@ -23,16 +23,17 @@ const cardSchema = new Schema(
       match: deadlineRegExp,
       default: Date.now(),
     },
-    column: {
+    taskOwner: {
       type: Schema.Types.ObjectId,
       ref: 'column', //перевірити точну назву//
+      required: true,
     },
   },
   { versionKey: false, timestamps: false }
 );
 
-cardSchema.post('save', handleMongooseError);
+taskSchema.post('save', handleMongooseError);
 
-const Card = model("card", cardSchema);
+const Task = model('task', taskSchema);
 
-export default Card;
+export default Task;
