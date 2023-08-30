@@ -10,9 +10,10 @@ const columnSchema = new Schema(
     board: {
       type: Schema.Types.ObjectId,
       ref: 'board',
+      required: true,
     },
 
-    cardOrder: {
+    taskOrder: {
       type: Array,
       default: [],
     },
