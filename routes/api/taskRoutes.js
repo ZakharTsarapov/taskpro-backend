@@ -6,12 +6,12 @@ import { getAllTasks, addTask, deleteTask, updateTask } from '../../controllers/
 
 const taskRouter = express.Router();
 
-taskRouter.post('/:id', authenticate, isValidId, validateBody(taskSchemas.addTaskSchema), addTask); // іd columns
+taskRouter.post('/:id', authenticate, isValidId, validateBody(taskSchemas.addTaskSchema), addTask.addTask); // іd columns
 
-taskRouter.get('/:id', authenticate, isValidId, getAllTasks); // іd columns
+taskRouter.get('/:id', authenticate, isValidId, getAllTasks.getAllTasks); // іd columns
 
-taskRouter.delete('/:id', authenticate, isValidId, deleteTask); // id task
+taskRouter.delete('/:id', authenticate, isValidId, deleteTask.deleteTask); // id task
 
-taskRouter.patch('/:id', authenticate, isValidId, validateBody(taskSchemas.updateTaskSchema), updateTask); // id task
+taskRouter.patch('/:id', authenticate, isValidId, validateBody(taskSchemas.updateTaskSchema), updateTask.updateTask); // id task
 
 export default taskRouter;

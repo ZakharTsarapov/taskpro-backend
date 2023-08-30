@@ -1,4 +1,5 @@
 import Task from '../../models/task-model.js';
+import { ctrlWrapper } from '../../decorators/index.js';
 
 const updateTask = async (req, res) => {
   const { id } = req.params;
@@ -11,4 +12,4 @@ const updateTask = async (req, res) => {
   res.status(200).json(result);
 };
 
-export default updateTask;
+export default { updateTask: ctrlWrapper(updateTask)};

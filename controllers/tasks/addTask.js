@@ -13,4 +13,4 @@ const addTask = async (req, res) => {
   res.status(201).json(result);
 };
 
-export default addTask;
+export default {addTask: ctrlWrapper(addTask)};

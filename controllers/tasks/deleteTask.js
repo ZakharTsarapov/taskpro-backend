@@ -13,4 +13,4 @@ const deleteTask = async (req, res) => {
   });
 };
 
-export default deleteTask;
+export default { deleteTask: ctrlWrapper(deleteTask)};
