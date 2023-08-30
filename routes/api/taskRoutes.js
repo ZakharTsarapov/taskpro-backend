@@ -6,7 +6,7 @@ import { getAllTasks, addTask, deleteTask, updateTask } from '../../controllers/
 
 const taskRouter = express.Router();
 
-taskRouter.post('/:id', authenticate, isValidId, validateBody(taskSchemas.addTaskSchema), addTask.addTask); // іd columns
+taskRouter.post('/', authenticate, validateBody(taskSchemas.addTaskSchema), addTask.addTask); // іd columns
 
 taskRouter.get('/:id', authenticate, isValidId, getAllTasks.getAllTasks); // іd columns
 
