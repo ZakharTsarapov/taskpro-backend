@@ -9,6 +9,7 @@ import columnRouter from './routes/api/columnRoutes.js';
 import swaggerUi from 'swagger-ui-express';
 import path from 'path';
 import fs from 'fs';
+import taskRouter from './routes/api/taskRoutes.js';
 
 const swaggerDocument = JSON.parse(fs.readFileSync(`${path.resolve()}/swagger.json`));
 
@@ -22,7 +23,9 @@ app.use('/users', authRouter);
 app.use('/boards', boardRouter);
 app.use('/columns', columnRouter);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/tasks', taskRouter);
+
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
