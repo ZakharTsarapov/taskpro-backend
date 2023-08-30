@@ -750,10 +750,6 @@
           "owner": {
             "type": "string",
             "example": "13231k3j12kh1jhjk"
-          },
-          "_id": {
-            "type": "string",
-            "example": "12312jkgj123h2jk1h"
           }
         }
       },

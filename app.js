@@ -3,9 +3,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import authRouter from './routes/api/authRoutes.js';
 import boardRouter from './routes/api/boardRoutes.js';
-
 import columnRouter from './routes/api/columnRoutes.js';
-
 import swaggerUi from 'swagger-ui-express';
 import path from 'path';
 import fs from 'fs';
@@ -22,11 +20,8 @@ app.use(express.json());
 app.use('/users', authRouter);
 app.use('/boards', boardRouter);
 app.use('/columns', columnRouter);
-
 app.use('/tasks', taskRouter);
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
