@@ -20,10 +20,10 @@ authRouter.post('/signout', authenticate, authControllers.signout);
 
 authRouter.post('/avatar', authenticate, upload.single('avatar'), updateAvatar.updateAvatar);
 
-// authRouter.put(':id/update', authenticate, upload.single('avatar'), updateCtrl.updateDataUser);
 authRouter.put('/update', authenticate, upload.single('avatar'), updateCtrl.updateDataUser);
-//authRouter.patch('/update', authenticate, updateCtrl.updateDataUser);
 
 authRouter.patch('/themes', validateBody(usersSchemas.userChangeTheme), authenticate, changeTheme.changeTheme);
+
+authRouter.post('/refresh', validateBody(usersSchemas.refreshSchema), authControllers.refresh);
 
 export default authRouter;
