@@ -587,6 +587,43 @@
         }
       }
     },
+    "/columns/:id": {
+      "get": {
+        "tags": ["Columns"],
+        "summary": "get all columns",
+        "description": "get all User boards",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the board",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAllColumns"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/tasks": {
       "post": {
         "tags": ["Tasks"],
@@ -1423,6 +1460,47 @@
             "type": "string",
             "example": "2023-08-31T08:42:05.501Z"
           }
+        }
+      },
+      "getAllColumns": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "tasks": [
+            {
+              "_id": "32lk5j59043k4klj",
+              "title": "Node column",
+              "board": "13892u5ih1451kj4hl3",
+              "taskOrder": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "121821kjkj2h438"
+                }
+              },
+              "index": "123"
+            },
+            {
+              "_id": "32lk5j59043k4klj",
+              "title": "React column",
+              "board": "136jk36h4khkj343",
+              "taskOrder": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "12kjh5673kj4ht4iu"
+                }
+              },
+              "index": "123"
+            }
+          ]
         }
       }
     }
