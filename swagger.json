@@ -439,6 +439,42 @@
           }
         }
       }
+    },
+    "/columns": {
+      "post": {
+        "tags": ["Columns"],
+        "summary": "Add Column",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Columns object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addColumnRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addColumnResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Column validation failed. Path board is required"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -866,6 +902,50 @@
             "owner": "254klj6lkjl6j3lk6j"
           },
           "columns": []
+        }
+      },
+      "addColumnRequest": {
+        "type": "object",
+        "required": [
+          "board"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "New Column"
+          },
+          "board": {
+            "type": "object",
+            "example": "1231jk4jkh98231y"
+          },
+          "index": {
+            "type": "string",
+            "example": "1"
+          }
+        }
+      },
+      "addColumnResponse": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "New Column"
+          },
+          "board": {
+            "type": "string",
+            "example": "64cff474d317457be0a3fa94"
+          },
+          "cardOrder": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "64cfc2efca899b99cc4b3000"
+            }
+          },
+          "_id": {
+            "type": "string",
+            "example": "64d13c39a01425f5d9c312ab"
+          }
         }
       }
     }
