@@ -623,6 +623,80 @@
           }
         }
       }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": ["Tasks"],
+        "summary": "get all tasks",
+        "description": "get all User tasks",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the column",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200" : {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAllTasksResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/tasks/{_id}": {
+      "delete": {
+        "tags": ["Tasks"],
+        "summary": "delete task",
+        "descripton": "delete User task",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "id of the task",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "task successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteTaskResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -955,16 +1029,10 @@
       "deleteBoardResponse": {
         "type": "object",
         "properties": {
-          "result": {
-            "type": "object",
-            "example": {
-              "_id": "1134jlk342l4kj2ljc",
-              "title": "new board",
-              "icon": "icon-colors",
-              "background": "background1",
-              "columnOrder": [],
-              "owner": "54klj463jlk34lkj"
-            }
+          "message": {
+            "type": "string",
+            "description": "Successful removal of a board",
+            "example": "Task deleted"
           }
         }
       },
@@ -1135,15 +1203,10 @@
       "deleteColumnResponse": {
         "type": "object",
         "properties": {
-          "result": {
-            "type": "object",
-            "example": {
-              "_id": "1134jlk342l4kj2ljc",
-              "title": "column",
-              "board": "2jk4h61j41h16v'oj",
-              "taskOrder": [],
-              "index": "1"
-            }
+          "message": {
+            "type": "string",
+            "description": "Successful removal of a column",
+            "example": "Column deleted"
           }
         }
       },
@@ -1233,6 +1296,47 @@
           "priority": {
             "type": "string",
             "example": "without"
+          }
+        }
+      },
+      "getAllTasksResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "tasks": [
+            {
+              "_id": "32lk5j59043k4klj",
+              "title": "Node task",
+              "description": "description",
+              "priority": "without",
+              "deadLine": "2023-08-31T08:39:06.416Z",
+              "taskOwner": "146kljh4kj72h425kjhy54k"
+            },
+            {
+              "_id": "45kj64l7kj647kj45lk54jl",
+              "title": "React task",
+              "description": "description",
+              "priority": "low",
+              "deadLine": "2023-08-31T08:39:06.416Z",
+              "taskOwner": "146kljh4kj72h425kjhy54k"
+            }
+          ]
+        }
+      },
+      "deleteTaskResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Successful removal of a task",
+            "example": "Task deleted"
           }
         }
       }
