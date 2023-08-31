@@ -475,6 +475,36 @@
           }
         }
       }
+    },
+    "/columns/{id}": {
+      "get": {
+        "tags": ["Columns"],
+        "summary": "get all columns",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "descripton": "get all User columns",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getAllColumnsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -946,6 +976,37 @@
             "type": "string",
             "example": "64d13c39a01425f5d9c312ab"
           }
+        }
+      },
+      "getAllColumnsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "columns": [
+            {
+              "_id": "32lk5j59043k4klj",
+              "title": "Node columns",
+              "board": "64ef12ccb500c3a26fcc7b31",
+              "index": "1",
+              "cardOrder": [],
+              "owner": "146kljh4kj72h425kjhy54k"
+            },
+            {
+              "_id": "45kj64l7kj647kj45lk54jl",
+              "title": "React board",
+              "icon": "icon-colors",
+              "background": "background2",
+              "columnOrder": [],
+              "owner": "146kljh4kj72h425kjhy54k"
+            }
+          ]
         }
       }
     }

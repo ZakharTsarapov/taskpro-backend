@@ -33,6 +33,8 @@ const signup = async (req, res) => {
     name,
     email,
     token,
+    theme: newUser.theme,
+    avatarURL: newUser.avatarURL,
   });
 };
 
@@ -59,7 +61,7 @@ const signin = async (req, res) => {
     name: user.name,
     token,
     theme: user.theme,
-    
+    avatarURL: user.avatarURL,
   });
 };
 
