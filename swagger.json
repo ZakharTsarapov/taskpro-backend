@@ -697,6 +697,53 @@
           }
         }
       }
+    },
+    "/tasks/{id}/": {
+      "patch": {
+        "tags": ["Tasks"],
+        "summary": "edit task",
+        "description": "edit task by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the task",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "edit task object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateTaskRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateTaskResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1337,6 +1384,44 @@
             "type": "string",
             "description": "Successful removal of a task",
             "example": "Task deleted"
+          }
+        }
+      },
+      "updateTaskRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "update"
+          }
+        }
+      },
+      "updateTaskResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "625l4k5j34lk34j4lk3j45"
+          },
+          "title": {
+            "type": "string",
+            "example": "update"
+          },
+          "description": {
+            "type": "string",
+            "example": "task description"
+          },
+          "priority": {
+            "type": "string",
+            "example": "without"
+          },
+          "taskOwner": {
+            "type": "string",
+            "example": "6425kjh4lkh3434ac"
+          },
+          "deadLine": {
+            "type": "string",
+            "example": "2023-08-31T08:42:05.501Z"
           }
         }
       }
