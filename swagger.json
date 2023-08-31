@@ -586,6 +586,43 @@
           }
         }
       }
+    },
+    "/tasks": {
+      "post": {
+        "tags": ["Tasks"],
+        "summary": "add task",
+        "description": "add User task",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "task object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addTaskRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addTaskResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1032,9 +1069,7 @@
       },
       "addColumnRequest": {
         "type": "object",
-        "required": [
-          "board"
-        ],
+        "required": ["board", "title", "index"],
         "properties": {
           "title": {
             "type": "string",
@@ -1151,6 +1186,53 @@
           "board": {
             "type": "string",
             "example": "6425kjh4lkh3434ac"
+          }
+        }
+      },
+      "addTaskRequest": {
+        "type": "object",
+        "required": ["title", "taskOwner", "description"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "New Column"
+          },
+          "taskOwner": {
+            "type": "object",
+            "example": "1231jk4jkh98231y"
+          },
+          "description": {
+            "type": "string",
+            "example": "task description"
+          }
+        }
+      },
+      "addTaskResponse": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "New task"
+          },
+          "taskOwner": {
+            "type": "string",
+            "example": "64cff474d317457be0a3fa94"
+          },
+          "_id": {
+            "type": "string",
+            "example": "64d13c39a01425f5d9c312ab"
+          },
+          "description": {
+            "type": "string",
+            "example": "task description"
+          },
+          "deadLine": {
+            "type": "string",
+            "example": "null"
+          },
+          "priority": {
+            "type": "string",
+            "example": "without"
           }
         }
       }
