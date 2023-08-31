@@ -479,10 +479,10 @@
     "/columns/{id}": {
       "get": {
         "tags": ["Columns"],
-        "summary": "get all columns",
+        "summary": "get column by id",
         "parameters": [],
         "security": [{ "Bearer": [] }],
-        "descripton": "get all User columns",
+        "descripton": "get User column by id",
         "responses": {
           "200": {
             "description": "success",
@@ -499,6 +499,87 @@
           },
           "404": {
             "description": "Not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/columns/{_id}": {
+      "delete": {
+        "tags": ["Columns"],
+        "descripton": "delete User column",
+        "summary": "delete column",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "id of the column",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Column successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteColumnResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/columns/{id}/": {
+      "put": {
+        "tags": ["Columns"],
+        "summary": "edit column",
+        "description": "edit column by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the column",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "edit column object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateColumnRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/updateColumnResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Column not found"
           },
           "500": {
             "description": "Server error"
@@ -993,7 +1074,7 @@
           }
         }
       },
-      "getAllColumnsResponse": {
+      "getColumnsResponse": {
         "type": "array",
         "items": {
           "type": "object",
@@ -1012,16 +1093,65 @@
               "index": "1",
               "cardOrder": [],
               "owner": "146kljh4kj72h425kjhy54k"
-            },
-            {
-              "_id": "45kj64l7kj647kj45lk54jl",
-              "title": "React board",
-              "icon": "icon-colors",
-              "background": "background2",
-              "columnOrder": [],
-              "owner": "146kljh4kj72h425kjhy54k"
             }
           ]
+        }
+      },
+      "deleteColumnResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "object",
+            "example": {
+              "_id": "1134jlk342l4kj2ljc",
+              "title": "column",
+              "board": "2jk4h61j41h16v'oj",
+              "taskOrder": [],
+              "index": "1"
+            }
+          }
+        }
+      },
+      "updateColumnRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "update"
+          }
+        }
+      },
+      "updateColumnResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "625l4k5j34lk34j4lk3j45"
+          },
+          "title": {
+            "type": "string",
+            "example": "update"
+          },
+          "index": {
+            "type": "string",
+            "example": "2"
+          },
+          "taskOrder": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "11841984bj43543k"
+                }
+              }
+            }
+          },
+          "board": {
+            "type": "string",
+            "example": "6425kjh4lkh3434ac"
+          }
         }
       }
     }
