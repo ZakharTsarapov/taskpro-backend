@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 import path from 'path';
 import fs from 'fs';
 import taskRouter from './routes/api/taskRoutes.js';
+import helpRouter from './routes/api/helpRoutes.js';
 
 const swaggerDocument = JSON.parse(fs.readFileSync(`${path.resolve()}/swagger.json`));
 
@@ -21,6 +22,7 @@ app.use('/users', authRouter);
 app.use('/boards', boardRouter);
 app.use('/columns', columnRouter);
 app.use('/tasks', taskRouter);
+app.use('/help', helpRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
