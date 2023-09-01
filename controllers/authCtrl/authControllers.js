@@ -76,6 +76,19 @@ const signout = async (req, res) => {
   });
 };
 
+const googleAuth = async (req, res) => {
+  const { _id: id } = req.user;
+  const payload = {
+    id,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
+  const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
+  await User.findByIdAndUpdate(id, { token, refreshToken });
+
+  res.redirect(`${FRONTEND_URL}?token=${token}&refreshToken=${refreshToken}`);
+};
+
 const refresh = async (req, res) => {
   const { refreshToken: tokenRef } = req.body;
   try {
@@ -102,4 +115,5 @@ export default {
   signin: ctrlWrapper(signin),
   signout: ctrlWrapper(signout),
   refresh: ctrlWrapper(refresh),
+  googleAuth: ctrlWrapper(googleAuth),
 };

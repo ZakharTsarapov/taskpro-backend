@@ -1,6 +1,6 @@
 import express from 'express';
 import authCtrl from '../../controllers/authCtrl/getCurrent.js';
-import { authenticate, isEmptyBody, upload } from '../../middlewares/index.js';
+import { authenticate, isEmptyBody, upload, passport } from '../../middlewares/index.js';
 import authControllers from '../../controllers/authCtrl/authControllers.js';
 import usersSchemas from '../../shemas/users-schemas.js';
 import { validateBody } from '../../decorators/index.js';
@@ -25,5 +25,9 @@ authRouter.put('/update', authenticate, upload.single('avatar'), updateCtrl.upda
 authRouter.patch('/themes', validateBody(usersSchemas.userChangeTheme), authenticate, changeTheme.changeTheme);
 
 authRouter.post('/refresh', validateBody(usersSchemas.refreshSchema), authControllers.refresh);
+
+authRouter.get('/google', passport.authenticate('google', { score: ['email', 'profile'] }));
+
+authRouter.get('/google/callback', passport.authenticate('google', { session: false }), authControllers.googleAuth);
 
 export default authRouter;
