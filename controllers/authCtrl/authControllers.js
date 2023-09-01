@@ -64,6 +64,7 @@ const signin = async (req, res) => {
     theme: user.theme,
     avatarURL: user.avatarURL,
     refreshToken,
+    email: user.email,
   });
 };
 
