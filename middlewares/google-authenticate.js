@@ -1,7 +1,7 @@
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import { nanoid } from 'nanoid';
-import { Strategy } from 'passport-google-oauth2';
+import  Strategy  from 'passport-google-oauth2';
 
 import User from '../models/user-model.js';
 
