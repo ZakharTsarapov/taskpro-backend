@@ -16,12 +16,18 @@ const userSigninSchema = Joi.object({
 });
 
 const userChangeTheme = Joi.object({
-  theme: Joi.string().valid(...themes).required(),
-})
+  theme: Joi.string()
+    .valid(...themes)
+    .required(),
+});
+
+const refreshSchema = Joi.object({
+  refreshToken: Joi.string().required(),
+});
 
 export default {
   userSignupSchema,
   userSigninSchema,
   userChangeTheme,
-
+  refreshSchema,
 };

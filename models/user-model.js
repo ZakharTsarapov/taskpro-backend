@@ -30,6 +30,10 @@ const userSchema = new Schema(
       type: String,
       default: '',
     },
+    refreshToken: {
+      type: String,
+      default: '',
+    },
     theme: {
       type: String,
       enum: themes,
