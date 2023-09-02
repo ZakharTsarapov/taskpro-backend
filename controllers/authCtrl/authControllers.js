@@ -54,7 +54,7 @@ const signin = async (req, res) => {
   };
 
   // const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '720h' });
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(user._id, { token, refreshToken });
 
@@ -83,7 +83,7 @@ const googleAuth = async (req, res) => {
     id,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(id, { token, refreshToken });
 
@@ -102,7 +102,7 @@ const refresh = async (req, res) => {
     const payload = {
       id,
     };
-    const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
+    const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
     const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
 
     res.json({ token, refreshToken });
