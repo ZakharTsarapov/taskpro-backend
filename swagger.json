@@ -81,7 +81,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/wrongResponse"
+                  "$ref": "#/components/schemas/emailInUse"
                 }
               }
             }
@@ -2011,6 +2011,15 @@
           "message": {
             "type": "string",
             "example": "Token expired"
+          }
+        }
+      },
+      "emailInUse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "email already in use"
           }
         }
       }
