@@ -2,8 +2,6 @@ import Joi from 'joi';
 
 const addColumnSchema = Joi.object({
   title: Joi.string().required(),
-
-  index: Joi.number().required(),
   board: Joi.string().required(),
 });
 

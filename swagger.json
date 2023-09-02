@@ -1629,10 +1629,6 @@
           "board": {
             "type": "object",
             "example": "1231jk4jkh98231y"
-          },
-          "index": {
-            "type": "string",
-            "example": "1"
           }
         }
       },
@@ -1676,7 +1672,6 @@
               "_id": "32lk5j59043k4klj",
               "title": "Node columns",
               "board": "64ef12ccb500c3a26fcc7b31",
-              "index": "1",
               "cardOrder": [],
               "owner": "146kljh4kj72h425kjhy54k"
             }
@@ -1712,10 +1707,6 @@
           "title": {
             "type": "string",
             "example": "update"
-          },
-          "index": {
-            "type": "string",
-            "example": "2"
           },
           "taskOrder": {
             "type": "array",

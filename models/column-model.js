@@ -17,10 +17,6 @@ const columnSchema = new Schema(
       type: Array,
       default: [],
     },
-    index: {
-      type: Number,
-      required: true,
-    },
   },
   { versionKey: false, timestamps: true }
 );
