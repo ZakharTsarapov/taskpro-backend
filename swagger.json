@@ -67,10 +67,24 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequest"
+                }
+              }
+            }
           },
           "409": {
-            "description": "Email already in use"
+            "description": "Email already in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wrongResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -103,7 +117,14 @@
             }
           },
           "401": {
-            "description": "Email or password invalid"
+            "description": "Email or password invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wrongResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -124,6 +145,36 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -140,8 +191,14 @@
             "content": {}
           },
           "401": {
-            "description": "not authorized",
-            "content": {}
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -176,7 +233,13 @@
           },
           "401": {
             "description": "Not authorized",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -209,8 +272,14 @@
             }
           },
           "401": {
-            "description": "not authorized",
-            "content": {}
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -247,14 +316,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "badRequestResponse"
+                  "$ref": "#/components/schemas/badRequestResponse"
                 }
               }
             }
           },
           "401": {
-            "description": "not authorized",
-            "content": {}
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -287,13 +362,34 @@
             }
           },
           "400": {
-            "description": "Invalid token"
+            "description": "invalid Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/invalidToken"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Refresh token expired"
+            "description": "Token expired",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/tokenExpired"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -308,12 +404,24 @@
             "description": "OK (Successful operation (redirect to front-end with access Token in query). Then use GET /user)"
           },
           "400": {
-            "description": "Bad request",
-            "content": {}
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequest"
+                }
+              }
+            }
           },
-          "401": {
-            "description": "Email or password is wrong",
-            "content": {}
+          "404": {
+            "description": "Wrong Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wrongResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -329,12 +437,24 @@
             "description": "Callback to user's page"
           },
           "400": {
-            "description": "Bad request",
-            "content": {}
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequest"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Not Found",
-            "content": {}
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -367,7 +487,14 @@
             }
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -439,14 +566,35 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Board not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -470,13 +618,34 @@
             }
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Not found"
+            "description": "Boards not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -513,13 +682,34 @@
             }
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Not found"
+            "description": "Board not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -552,10 +742,24 @@
             }
           },
           "400": {
-            "description": "Column validation failed. Path board is required"
+            "description": "Column validation failed. Path board is required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -630,13 +834,34 @@
             }
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Column not found"
+            "description": "Column not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -670,10 +895,24 @@
             }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Column not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -707,10 +946,24 @@
             }
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -744,10 +997,24 @@
             }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -781,10 +1048,24 @@
             }
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notAuthorizedResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -828,10 +1109,24 @@
             }
           },
           "404": {
-            "description": "Task not found"
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/serverErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -1653,6 +1948,69 @@
             "type": "string",
             "description": "Current user's name",
             "example": "Email was successfully sent"
+          }
+        }
+      },
+      "serverErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "server Error"
+          }
+        }
+      },
+      "notFoundResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Not found"
+          }
+        }
+      },
+      "notAuthorizedResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Not Authorized"
+          }
+        }
+      },
+      "badRequest": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "bad request"
+          }
+        }
+      },
+      "wrongResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "email or password wrong"
+          }
+        }
+      },
+      "invalidToken": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Invalid Token"
+          }
+        }
+      },
+      "tokenExpired": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Token expired"
           }
         }
       }
