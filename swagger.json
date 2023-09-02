@@ -32,6 +32,10 @@
     {
       "name": "Tasks",
       "description": "Tasks endpoints"
+    },
+    {
+      "name": "Help",
+      "description": "Need Help endpoint"
     }
   ],
   "paths": {
@@ -250,6 +254,86 @@
           },
           "401": {
             "description": "not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/refresh": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "refresh users tokens",
+        "parameters": [],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "description": "user token object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/refreshTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/refreshTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid token"
+          },
+          "401": {
+            "description": "Refresh token expired"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/users/google": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "User Google registration",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK (Successful operation (redirect to front-end with access Token in query). Then use GET /user)"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/users/google/callback": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Google callback",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "302": {
+            "description": "Callback to user's page"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "404": {
+            "description": "Not Found",
             "content": {}
           }
         }
@@ -649,7 +733,7 @@
         ],
         "security": [{ "Bearer": [] }],
         "responses": {
-          "200" : {
+          "200": {
             "description": "success",
             "content": {
               "application/json": {
@@ -751,6 +835,46 @@
           }
         }
       }
+    },
+    "/help": {
+      "post": {
+        "tags": ["Help"],
+        "summary": "Need help form submitting",
+        "parameters": [],
+        "requestBody": {
+          "description": "Need help object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/needHelpRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "email was successfully sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/needHelpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "missing fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/badRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -848,6 +972,16 @@
           "avatarURL": {
             "type": "string",
             "example": "/"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "format": "email",
+            "example": "ivan@gmail.com"
+          },
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ8.eyJpZCI6IjY0Y5JkZGU2ZjA4NDViZDA2ZWMzNWIwNCIsImlhdCI6MTY5MTA4ODkxOSwiZXhwIjoxNjkxMTcxNzE5fQ."
           }
         }
       },
@@ -1471,6 +1605,55 @@
               "index": "123"
             }
           ]
+        }
+      },
+      "refreshTokenRequest": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "1298152j4897vny87v6rn223465k4j7b4l3kj7m3jl3j6l7j6l3jv6l7jl36jbl6v3l"
+          }
+        }
+      },
+      "refreshTokenResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "1298152j4897vny87v6rn223465k4j704968b3m73n9v839c6l7j6l3jv6l7jl36jbl6v3l"
+          },
+          "refreshToken": {
+            "type": "string",
+            "example": "1298152j4897vny87v6rn223465k4j704968b3m73n9v839c6l7j6l3jv6l7jl36jbl6v3l"
+          }
+        }
+      },
+      "needHelpRequest": {
+        "type": "object",
+        "required": ["email", "comment"],
+        "properties": {
+          "replyEmail": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email",
+            "example": "Ihor@example.com"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User's comment",
+            "example": "I need help with application"
+          }
+        }
+      },
+      "needHelpResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Current user's name",
+            "example": "Email was successfully sent"
+          }
         }
       }
     }
