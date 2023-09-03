@@ -25,7 +25,7 @@ const signup = async (req, res) => {
   const payload = {
     id: newUser._id,
   };
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '720h' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
   await User.findByIdAndUpdate(newUser._id, { token });
 
   res.status(201).json({
@@ -55,25 +55,17 @@ const signin = async (req, res) => {
 
   // const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '720h' });
   const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+  //const accessToken = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(user._id, { token, refreshToken });
 
   res.json({
     name: user.name,
+    email: user.email,
     token,
     theme: user.theme,
     avatarURL: user.avatarURL,
     refreshToken,
-    email: user.email,
-  });
-};
-
-const signout = async (req, res) => {
-  const { _id } = req.user;
-  await User.findByIdAndUpdate(_id, { token: '', refreshToken: '' });
-
-  res.json({
-    message: 'Signout ssucess',
   });
 };
 
@@ -84,6 +76,7 @@ const googleAuth = async (req, res) => {
   };
 
   const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+  //const accessToken = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(id, { token, refreshToken });
 
@@ -103,7 +96,9 @@ const refresh = async (req, res) => {
       id,
     };
     const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+    //const accessToken = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
     const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
+    await User.findByIdAndUpdate(id, { token, refreshToken });
 
     res.json({ token, refreshToken });
   } catch (error) {
@@ -111,10 +106,19 @@ const refresh = async (req, res) => {
   }
 };
 
+const signout = async (req, res) => {
+  const { _id } = req.user;
+  await User.findByIdAndUpdate(_id, { token: '', refreshToken: '' });
+
+  res.json({
+    message: 'Signout ssucess',
+  });
+};
+
 export default {
   signup: ctrlWrapper(signup),
   signin: ctrlWrapper(signin),
-  signout: ctrlWrapper(signout),
-  refresh: ctrlWrapper(refresh),
   googleAuth: ctrlWrapper(googleAuth),
+  refresh: ctrlWrapper(refresh),
+  signout: ctrlWrapper(signout),
 };

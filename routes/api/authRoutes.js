@@ -10,13 +10,15 @@ import updateCtrl from '../../controllers/authCtrl/updateDataUser.js';
 
 const authRouter = express.Router();
 
-authRouter.get('/current', authenticate, authCtrl.getCurrent);
+authRouter.get('/google', passport.authenticate('google', { score: ['email', 'profile'] }));
 
+authRouter.get('/google/callback', passport.authenticate('google', { session: false }), authControllers.googleAuth);
 authRouter.post('/signup', validateBody(usersSchemas.userSignupSchema), authControllers.signup);
 
 authRouter.post('/signin', validateBody(usersSchemas.userSigninSchema), authControllers.signin);
+authRouter.post('/refresh', validateBody(usersSchemas.refreshSchema), authControllers.refresh);
 
-authRouter.post('/signout', authenticate, authControllers.signout);
+authRouter.get('/current', authenticate, authCtrl.getCurrent);
 
 authRouter.post('/avatar', authenticate, upload.single('avatar'), updateAvatar.updateAvatar);
 
@@ -24,10 +26,5 @@ authRouter.put('/update', authenticate, upload.single('avatar'), updateCtrl.upda
 
 authRouter.patch('/themes', validateBody(usersSchemas.userChangeTheme), authenticate, changeTheme.changeTheme);
 
-authRouter.post('/refresh', validateBody(usersSchemas.refreshSchema), authControllers.refresh);
-
-authRouter.get('/google', passport.authenticate('google', { score: ['email', 'profile'] }));
-
-authRouter.get('/google/callback', passport.authenticate('google', { session: false }), authControllers.googleAuth);
-
+authRouter.post('/signout', authenticate, authControllers.signout);
 export default authRouter;
