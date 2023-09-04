@@ -25,7 +25,7 @@ const signup = async (req, res) => {
   const payload = {
     id: newUser._id,
   };
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   await User.findByIdAndUpdate(newUser._id, { token });
 
   res.status(201).json({
@@ -54,7 +54,7 @@ const signin = async (req, res) => {
   };
 
   // const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '720h' });
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   //const accessToken = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(user._id, { token, refreshToken });
@@ -75,7 +75,7 @@ const googleAuth = async (req, res) => {
     id,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   //const accessToken = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(id, { token, refreshToken });
@@ -95,7 +95,7 @@ const refresh = async (req, res) => {
     const payload = {
       id,
     };
-    const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+    const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
     //const accessToken = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
     const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
     await User.findByIdAndUpdate(id, { token, refreshToken });
