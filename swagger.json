@@ -1612,10 +1612,58 @@
             "title": "New Board",
             "icon": "icon-colors",
             "background": "background1",
-            "columnOrder": [],
+            "columnOrder": [
+              "64f5d9019966151048f20103",
+              "64f5d90a9966151048f20107"
+            ],
             "owner": "254klj6lkjl6j3lk6j"
           },
-          "columns": []
+          "columns": [{
+                "_id": {
+                  "type": "string",
+                  "example": "10293810981028391302"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "valera"
+                },
+                "board": {
+                  "type": "string",
+                  "example": "2394h9384h9371c87124chj3iih"
+                },
+                "taskOrder": {
+                  "type": "array",
+                  "items": {
+                    "example": "128j9hgugugjn25k2k5h3j"
+                  }
+                },
+                "tasks": [{
+                  "_id": {
+                    "type": "string",
+                    "example": "1hjk4hkjh3k52k"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Kolonka"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "kolonka valery"
+                  },
+                  "priority": {
+                    "type": "array",
+                    "example": "without"
+                  },
+                  "deadLine": {
+                    "type": "string",
+                    "example": "2023-09-04T13:09:15.121Z"
+                  },
+                  "taskOwner": {
+                    "type": "string",
+                    "example": "123ghgj2323y2y39h3d"
+                  }
+                }]
+          }]
         }
       },
       "addColumnRequest": {
