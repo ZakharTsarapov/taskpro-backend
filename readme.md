@@ -1,4 +1,12 @@
-TaskPro Backend <a href="https://taskpro-backend-jo75.onrender.com/api-docs/">API</a>є кастомним Бек-ендом написанним для <a href="https://melnychenkojenny.github.io/Task-Manager/">Task Pro</a> Проєкт побудований на основі Node.js, використовуючи фреймворк Express.js для реалізації API та Mongoose для зручної взаємодії з базою даних MongoDB.
+<h1>Наша команда : </h1>
+<ul>
+<li><a href="https://github.com/ZakharTsarapov">Zakhar Tsarapov</a> - TeamLead Backend</li>
+<li><a href="https://github.com/OlgaTikhonchik">Olga Tikhonchik</a> - Developer Backend</li>
+<li><a href="https://github.com/HelenGachkovska">Helen Gachkovska</a> - Developer Backend</li>
+<li><a href="https://github.com/K-Basket">Kostiantyn Koshyk</a> - Developer Backend</li>
+</ul>
+
+TaskPro Backend <a href="https://taskpro-backend-jo75.onrender.com/api-docs/">API</a>  є кастомним Бек-ендом написанним для <a href="https://melnychenkojenny.github.io/Task-Manager/">Task Pro</a> Проєкт побудований на основі Node.js, використовуючи фреймворк Express.js для реалізації API та Mongoose для зручної взаємодії з базою даних MongoDB.
 
 
 <h2> Аутентифікація та авторизація</h2>
