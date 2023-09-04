@@ -1,4 +1,5 @@
-TaskPro Backend API опис буде доповнюватися згідно виконаного функціоналу.
+TaskPro Backend <a href="https://taskpro-backend-jo75.onrender.com/api-docs/">API</a>є кастомним Бек-ендом написанним для <a href="https://melnychenkojenny.github.io/Task-Manager/">Task Pro</a> Проєкт побудований на основі Node.js, використовуючи фреймворк Express.js для реалізації API та Mongoose для зручної взаємодії з базою даних MongoDB.
+
 
 <h2> Аутентифікація та авторизація</h2>
 <ul>
