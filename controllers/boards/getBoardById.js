@@ -21,7 +21,7 @@ const getBoardById = async (req, res) => {
         $lookup: {
           from: "tasks",
           localField: "_id",
-          foreignField: "board",
+          foreignField: "taskOwner",
           as: "tasks",
         },
       },
