@@ -13,7 +13,7 @@ const updateTaskSchema = Joi.object({
   title: Joi.string(),
   description: Joi.string(),
   priority: Joi.string().valid(...priorities),
-  deadLine: Joi.date(),
+  deadLine: Joi.string(),
   taskOwner: Joi.string(),
 });
 
