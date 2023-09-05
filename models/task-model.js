@@ -19,9 +19,9 @@ const taskSchema = new Schema(
       default: priorities[0],
     },
     deadLine: {
-      type: Date,
+      type: String,
       match: deadlineRegExp,
-      default: Date.now(),
+      default: null,
     },
     taskOwner: {
       type: Schema.Types.ObjectId,
