@@ -5,7 +5,7 @@ const addTaskSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
   priority: Joi.string().valid(...priorities),
-  deadLine: Joi.date(),
+  deadLine: Joi.string(),
   taskOwner: Joi.string().required(),
 });
 
