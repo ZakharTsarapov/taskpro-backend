@@ -11,7 +11,6 @@ const taskSchema = new Schema(
     },
     description: {
       type: String,
-      required: [true, 'Must be the description of the card.'],
     },
     priority: {
       type: String,
