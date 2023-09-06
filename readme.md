@@ -1,7 +1,7 @@
 <h1>Наша команда : </h1>
 <ul>
 <li><a href="https://github.com/ZakharTsarapov">Zakhar Tsarapov</a> - TeamLead Backend</li>
-<li><a href="https://github.com/OlgaTikhonchik">Olga Tikhonchik</a> - Developer Backend</li>
+<li><a href="https://github.com/OlgaTikhonchik">Olga Tykhonchyk</a> - Developer Backend</li>
 <li><a href="https://github.com/HelenGachkovska">Helen Gachkovska</a> - Developer Backend</li>
 <li><a href="https://github.com/K-Basket">Kostiantyn Koshyk</a> - Developer Backend</li>
 </ul>
