@@ -13,6 +13,7 @@ export const icons = [
 ];
 
 export const backgrounds = [
+  'background0',
   'background1',
   'background2',
   'background3',
