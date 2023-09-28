@@ -25,7 +25,7 @@ const signup = async (req, res) => {
   const payload = {
     id: newUser._id,
   };
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '10s' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '2m' });
   const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   await User.findByIdAndUpdate(newUser._id, { token, refreshToken });
 
