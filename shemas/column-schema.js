@@ -7,6 +7,7 @@ const addColumnSchema = Joi.object({
 
 const updateColumnSchema = Joi.object({
   title: Joi.string().required(),
+  taskOrder: Joi.array()
 });
 
 const columnSchemas = { addColumnSchema, updateColumnSchema };
